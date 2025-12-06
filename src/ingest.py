@@ -28,3 +28,17 @@ def github_headers():
     return h
 
 
+def fetch_github_founder(username: str) -> dict:
+    """
+    Pull technical depth signals for a founder from GitHub.
+    Returns a flat dict of features.
+    """
+    base = "https://api.github.com"
+    headers = github_headers()
+
+    # User profile
+    r = requests.get(f"{base}/users/{username}", headers=headers, timeout=10)
+    if r.status_code != 200:
+        return {"github_username": username, "github_fetch_ok": False}
+    u = r.json()
+
