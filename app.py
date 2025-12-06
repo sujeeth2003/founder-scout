@@ -110,3 +110,15 @@ with col2:
                 </div>
                 """, unsafe_allow_html=True)
 
+                if score["risk_flags"]:
+                    st.warning("**Risk Flags:** " + " · ".join(score["risk_flags"]))
+
+                st.markdown("---")
+                st.markdown(memo)
+
+            except FileNotFoundError:
+                st.error("Model not trained. Click 'Train / Retrain Model' in the sidebar first.")
+            except Exception as e:
+                st.error(f"Error: {e}")
+    else:
+        st.info("Fill in the profile on the left and click **Score & Generate Memo**.")
