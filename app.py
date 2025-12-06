@@ -90,3 +90,23 @@ with col2:
             "domain_overlap":      float(domain_fit),
         }
         if gh_user:
+            profile["github_username"] = gh_user
+
+        with st.spinner("Running scoring pipeline..."):
+            try:
+                result = generate_memo(profile)
+                score  = result["model_score"]
+                memo   = result["memo_markdown"]
+
+                prob  = score["series_a_probability"]
+                label = score["score_label"]
+                color = "#2ecc71" if prob > 0.65 else "#f39c12" if prob > 0.40 else "#e74c3c"
+
+                st.markdown(f"""
+                <div style='background:{color}22; border-left:4px solid {color};
+                            padding:12px; border-radius:6px; margin-bottom:12px'>
+                    <b style='font-size:1.4em'>{prob:.0%}</b> Series A Probability
+                    &nbsp;·&nbsp; <b>{label}</b>
+                </div>
+                """, unsafe_allow_html=True)
+
