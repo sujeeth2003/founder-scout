@@ -68,3 +68,9 @@ startup profile (dict)
 | Pivot count | Input |
 | Founder education signals | Input |
 
+## Extending to Real Data
+
+- **Crunchbase**: Replace `generate_synthetic_startups()` in `ingest.py` with a Crunchbase API client. The schema is identical.
+- **LinkedIn**: Use LinkedIn API or a data provider (Proxycurl) for founder employment history.
+- **GitHub**: Already live — set `GITHUB_TOKEN` for 5000 req/hr.
+
