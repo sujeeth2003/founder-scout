@@ -54,3 +54,17 @@ startup profile (dict)
    investment memo (markdown)
 ```
 
+## Features
+
+| Feature | Source |
+|---|---|
+| Founder prior exits | Input |
+| Team size at seed | Input |
+| GitHub stars (technical traction) | GitHub API or input |
+| GitHub language diversity | GitHub API |
+| Press mentions | Input |
+| Domain overlap with fund thesis | Input (0–1 score) |
+| Seed amount | Input |
+| Pivot count | Input |
+| Founder education signals | Input |
+
