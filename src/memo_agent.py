@@ -60,3 +60,18 @@ def enrich_node(state: DealState) -> DealState:
 
     return {**state, "github_signals": signals, "startup_profile": profile}
 
+
+def score_node(state: DealState) -> DealState:
+    """Run the GB classifier and get probability + risk flags."""
+    try:
+        bundle = load_model("outputs/model.pkl")
+        score  = score_startup(state["startup_profile"], bundle)
+    except FileNotFoundError:
+        # Model not trained yet — return neutral score with note
+        score = {
+            "series_a_probability": 0.5,
+            "score_label": "Unscored (run python src/model.py first)",
+            "risk_flags": [],
+        }
+    return {**state, "model_score": score}
+
