@@ -128,3 +128,21 @@ def generate_synthetic_startups(n: int = 800, seed: int = 42) -> pd.DataFrame:
     prob = 1 / (1 + np.exp(-log_odds + 1.5))
     series_a_success = rng.binomial(1, prob)
 
+    df = pd.DataFrame({
+        "n_founders":          n_founders,
+        "founder_prior_exits": founder_prior_exits,
+        "founder_ivy":         founder_ivy,
+        "founder_phd":         founder_phd,
+        "team_size_at_seed":   team_size_at_seed,
+        "sector":              sector,
+        "location":            location,
+        "seed_amount_usd":     seed_amount_usd,
+        "months_since_seed":   months_since_seed,
+        "pivot_count":         pivot_count,
+        "has_patent":          has_patent,
+        "github_stars_proxy":  github_stars_proxy,
+        "press_mentions":      press_mentions,
+        "domain_overlap":      domain_overlap,
+        "series_a_success":    series_a_success,
+    })
+
