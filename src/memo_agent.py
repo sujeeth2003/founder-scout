@@ -46,3 +46,17 @@ class DealState(TypedDict):
 
 # ─── Nodes ────────────────────────────────────────────────────────────────────
 
+def enrich_node(state: DealState) -> DealState:
+    """Fetch GitHub signals if a username is provided."""
+    profile = state["startup_profile"]
+    gh_user = profile.get("github_username")
+
+    if gh_user:
+        signals = fetch_github_founder(gh_user)
+        # Map GitHub features back to model-compatible fields
+        profile["github_stars_proxy"] = signals.get("gh_total_stars", 0)
+    else:
+        signals = {}
+
+    return {**state, "github_signals": signals, "startup_profile": profile}
+
