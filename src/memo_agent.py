@@ -91,3 +91,17 @@ Structure: Overview | Team | Traction | Market | Risks | Recommendation"""
     user_prompt = f"""
 Write a one-page investment memo for this startup.
 
+## Startup Profile
+{json.dumps(profile, indent=2)}
+
+## Model Score
+- Series A Probability: {score['series_a_probability']:.0%}
+- Signal: {score['score_label']}
+- Risk Flags: {', '.join(score['risk_flags']) if score['risk_flags'] else 'None identified'}
+
+## GitHub Signals (if available)
+{json.dumps(gh, indent=2) if gh else 'Not available'}
+
+Write the memo now. Be direct. Use numbers where available. Flag key risks clearly.
+"""
+
