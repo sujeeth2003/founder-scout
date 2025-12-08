@@ -115,3 +115,17 @@ Write the memo now. Be direct. Use numbers where available. Flag key risks clear
 
 # ─── Graph ────────────────────────────────────────────────────────────────────
 
+def build_graph() -> StateGraph:
+    g = StateGraph(DealState)
+    g.add_node("enrich",     enrich_node)
+    g.add_node("score",      score_node)
+    g.add_node("write_memo", write_memo_node)
+
+    g.set_entry_point("enrich")
+    g.add_edge("enrich",     "score")
+    g.add_edge("score",      "write_memo")
+    g.add_edge("write_memo", END)
+
+    return g.compile()
+
+
