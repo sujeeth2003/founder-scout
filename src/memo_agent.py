@@ -129,3 +129,35 @@ def build_graph() -> StateGraph:
     return g.compile()
 
 
+def generate_memo(startup_profile: dict) -> dict:
+    """
+    Main entry point. Pass a startup dict, get back memo + scores.
+
+    Example:
+        result = generate_memo({
+            "company": "ArcLight AI",
+            "sector": "AI/ML",
+            "description": "Developer tools for LLM observability",
+            "n_founders": 2,
+            "founder_prior_exits": 1,
+            "founder_ivy": 0,
+            "founder_phd": 1,
+            "team_size_at_seed": 3,
+            "seed_amount_usd": 750000,
+            "months_since_seed": 8,
+            "pivot_count": 0,
+            "has_patent": 0,
+            "press_mentions": 4,
+            "domain_overlap": 0.85,
+            "github_username": "torvalds",   # optional — pulls live GitHub data
+        })
+        print(result["memo_markdown"])
+    """
+    graph  = build_graph()
+    result = graph.invoke({
+        "startup_profile": startup_profile,
+        "github_signals":  {},
+        "model_score":     {},
+        "memo_markdown":   "",
+        "error":           None,
+    })
