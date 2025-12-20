@@ -161,3 +161,26 @@ def generate_memo(startup_profile: dict) -> dict:
         "memo_markdown":   "",
         "error":           None,
     })
+    return result
+
+
+if __name__ == "__main__":
+    # Demo — runs the full pipeline on a sample startup
+    sample = {
+        "company":             "ArcLight AI",
+        "sector":              "AI/ML",
+        "description":         "LLM observability and evaluation tooling for enterprise AI teams",
+        "n_founders":          2,
+        "founder_prior_exits": 1,
+        "founder_ivy":         0,
+        "founder_phd":         1,
+        "team_size_at_seed":   3,
+        "seed_amount_usd":     750_000,
+        "months_since_seed":   8,
+        "pivot_count":         0,
+        "has_patent":          0,
+        "press_mentions":      4,
+        "domain_overlap":      0.85,
+        "github_stars_proxy":  600,
+    }
+
