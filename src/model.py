@@ -40,3 +40,13 @@ FEATURE_COLS = [
     "sector_encoded",
 ]
 
+TARGET_COL = "series_a_success"
+
+
+def encode_features(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    le = LabelEncoder()
+    df["sector_encoded"] = le.fit_transform(df["sector"].astype(str))
+    return df, le
+
+
