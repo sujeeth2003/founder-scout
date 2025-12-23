@@ -50,3 +50,19 @@ def encode_features(df: pd.DataFrame) -> pd.DataFrame:
     return df, le
 
 
+def train(data_path: str = "data/startups.csv",
+          output_dir: str = "outputs",
+          test_size: float = 0.2,
+          seed: int = 42):
+
+    df = pd.read_csv(data_path)
+    df, le = encode_features(df)
+
+    X = df[FEATURE_COLS]
+    y = df[TARGET_COL]
+
+    # Hold out 2020–2022 style cohort (last 20% by index — mirrors time-based split)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=seed, stratify=y
+    )
+
