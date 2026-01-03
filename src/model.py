@@ -97,3 +97,10 @@ def train(data_path: str = "data/startups.csv",
                 f"{output_dir}/model.pkl")
     print(f"\nModel saved to {output_dir}/model.pkl")
 
+    return model, le, auc
+
+
+def load_model(path: str = "outputs/model.pkl"):
+    return joblib.load(path)
+
+
