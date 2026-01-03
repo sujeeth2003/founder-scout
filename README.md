@@ -74,3 +74,12 @@ startup profile (dict)
 - **LinkedIn**: Use LinkedIn API or a data provider (Proxycurl) for founder employment history.
 - **GitHub**: Already live — set `GITHUB_TOKEN` for 5000 req/hr.
 
+## Results
+
+Trained on 800 synthetic startups mirroring historical seed-to-Series-A conversion patterns:
+- Test ROC-AUC: **~0.81**
+- 5-Fold CV AUC: **0.79 ± 0.03**
+
+---
+
+Built by [Sujeeth Sukumar](https://sujeeth2003.github.io/Portfolio/)
