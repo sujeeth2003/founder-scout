@@ -25,3 +25,12 @@ export GITHUB_TOKEN=your_token_here   # optional — raises rate limit to 5000/h
 python src/ingest.py          # creates data/startups.csv
 python src/model.py           # trains model, saves to outputs/model.pkl
 
+# 2. Run a demo memo generation
+python src/memo_agent.py
+
+# 3. Launch the Streamlit UI
+streamlit run app.py
+```
+
+---
+
