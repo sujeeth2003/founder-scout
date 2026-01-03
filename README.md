@@ -34,3 +34,23 @@ streamlit run app.py
 
 ---
 
+## Architecture
+
+```
+startup profile (dict)
+        │
+   ┌────▼─────┐
+   │  enrich  │  ← GitHub API (live technical depth signals)
+   └────┬─────┘
+        │
+   ┌────▼─────┐
+   │  score   │  ← Gradient Boosting classifier (300 trees, 13 features)
+   └────┬─────┘
+        │
+   ┌────▼──────────┐
+   │  write_memo   │  ← Claude (claude-sonnet-4) via LangGraph
+   └────┬──────────┘
+        │
+   investment memo (markdown)
+```
+
