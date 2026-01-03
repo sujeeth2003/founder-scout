@@ -148,3 +148,12 @@ def score_startup(startup: dict, model_bundle: dict) -> dict:
     if row.get("github_stars_proxy", 0) < 100:
         flags.append("Limited technical traction signals")
 
+    return {
+        "series_a_probability": round(prob, 4),
+        "score_label": "Strong" if prob > 0.65 else "Moderate" if prob > 0.40 else "Weak",
+        "risk_flags": flags,
+    }
+
+
+if __name__ == "__main__":
+    train()
