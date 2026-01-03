@@ -13,7 +13,7 @@ AI-powered startup deal sourcing and founder scoring tool.
 ## Quickstart
 
 ```bash
-git clone https://github.com/<your-username>/founder-scout
+git clone https://github.com/sujeeth2003/founder-scout
 cd founder-scout
 pip install -r requirements.txt
 
