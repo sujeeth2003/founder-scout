@@ -58,3 +58,35 @@ with col1:
     months_since   = c3.slider("Months since seed", 1, 48, 10)
     pivot_count    = c4.number_input("# Pivots", 0, 4, 0)
 
+    st.markdown("**Traction**")
+    c5, c6 = st.columns(2)
+    gh_stars    = c5.number_input("GitHub stars (proxy)", 0, 10_000, 300)
+    press       = c6.number_input("Press mentions", 0, 50, 3)
+    has_patent  = st.checkbox("Has patent")
+    domain_fit  = st.slider("Domain overlap with fund thesis", 0.0, 1.0, 0.7)
+
+    run = st.button("Score & Generate Memo", type="primary")
+
+# ─── Output ───────────────────────────────────────────────────────────────────
+with col2:
+    st.subheader("Output")
+
+    if run:
+        profile = {
+            "company":             company,
+            "sector":              sector,
+            "description":         description,
+            "n_founders":          int(n_founders),
+            "founder_prior_exits": int(prior_exits),
+            "founder_ivy":         int(founder_ivy),
+            "founder_phd":         int(founder_phd),
+            "team_size_at_seed":   int(team_size),
+            "seed_amount_usd":     int(seed_amount),
+            "months_since_seed":   int(months_since),
+            "pivot_count":         int(pivot_count),
+            "has_patent":          int(has_patent),
+            "github_stars_proxy":  int(gh_stars),
+            "press_mentions":      int(press),
+            "domain_overlap":      float(domain_fit),
+        }
+        if gh_user:
