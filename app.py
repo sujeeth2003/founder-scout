@@ -44,3 +44,17 @@ with col1:
     description = st.text_area("One-line description", "LLM observability tooling for enterprise AI teams")
     gh_user     = st.text_input("GitHub username (optional — pulls live data)", "")
 
+    st.markdown("**Founder Signals**")
+    c1, c2 = st.columns(2)
+    n_founders          = c1.number_input("# Founders", 1, 6, 2)
+    prior_exits         = c2.number_input("Prior exits", 0, 4, 0)
+    founder_ivy         = c1.checkbox("Ivy / top-10 university")
+    founder_phd         = c2.checkbox("PhD founder")
+
+    st.markdown("**Funding & Team**")
+    c3, c4 = st.columns(2)
+    team_size      = c3.number_input("Team size at seed", 1, 20, 3)
+    seed_amount    = c4.number_input("Seed amount ($)", 100_000, 5_000_000, 500_000, step=50_000)
+    months_since   = c3.slider("Months since seed", 1, 48, 10)
+    pivot_count    = c4.number_input("# Pivots", 0, 4, 0)
+
