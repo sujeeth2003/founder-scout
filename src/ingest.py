@@ -16,3 +16,15 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timezone
 
+
+# ─── GitHub API ───────────────────────────────────────────────────────────────
+
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")  # optional — raises rate limit from 60 to 5000 req/hr
+
+def github_headers():
+    h = {"Accept": "application/vnd.github+json"}
+    if GITHUB_TOKEN:
+        h["Authorization"] = f"Bearer {GITHUB_TOKEN}"
+    return h
+
+
