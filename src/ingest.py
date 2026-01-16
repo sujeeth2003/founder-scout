@@ -60,3 +60,22 @@ def fetch_github_founder(username: str) -> dict:
         for r in repos for kw in ["ml", "ai", "model", "neural", "gpt", "llm", "predict"]
     )
 
+    account_age_days = 0
+    if u.get("created_at"):
+        created = datetime.fromisoformat(u["created_at"].replace("Z", "+00:00"))
+        account_age_days = (datetime.now(timezone.utc) - created).days
+
+    return {
+        "github_username":    username,
+        "github_fetch_ok":    True,
+        "gh_followers":       u.get("followers", 0),
+        "gh_public_repos":    repo_count,
+        "gh_total_stars":     total_stars,
+        "gh_total_forks":     total_forks,
+        "gh_languages_count": len(languages),
+        "gh_has_ml_repo":     int(has_ml_repo),
+        "gh_account_age_days":account_age_days,
+        "gh_hireable":        int(bool(u.get("hireable"))),
+        "gh_blog":            int(bool(u.get("blog"))),
+    }
+
