@@ -42,3 +42,21 @@ def fetch_github_founder(username: str) -> dict:
         return {"github_username": username, "github_fetch_ok": False}
     u = r.json()
 
+    # Repo list (first 100)
+    repos_r = requests.get(
+        f"{base}/users/{username}/repos?per_page=100&sort=pushed",
+        headers=headers, timeout=10
+    )
+    repos = repos_r.json() if repos_r.status_code == 200 else []
+    time.sleep(0.5)  # stay polite
+
+    total_stars    = sum(r.get("stargazers_count", 0) for r in repos)
+    total_forks    = sum(r.get("forks_count", 0) for r in repos)
+    repo_count     = len(repos)
+    languages      = list({r.get("language") for r in repos if r.get("language")})
+    has_ml_repo    = any(
+        kw in (r.get("description") or "").lower() or
+        kw in (r.get("name") or "").lower()
+        for r in repos for kw in ["ml", "ai", "model", "neural", "gpt", "llm", "predict"]
+    )
+
