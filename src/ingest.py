@@ -79,3 +79,18 @@ def fetch_github_founder(username: str) -> dict:
         "gh_blog":            int(bool(u.get("blog"))),
     }
 
+
+# ─── Synthetic Crunchbase-style dataset ───────────────────────────────────────
+
+def generate_synthetic_startups(n: int = 800, seed: int = 42) -> pd.DataFrame:
+    """
+    Generates a realistic synthetic startup dataset.
+    Schema mirrors Crunchbase export format so swapping in real data
+    requires only replacing this function with an API call.
+
+    Target label: series_a_success
+      1 = raised Series A within 3 years of seed
+      0 = did not raise / shut down
+    """
+    rng = np.random.default_rng(seed)
+
