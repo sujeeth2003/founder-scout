@@ -94,3 +94,21 @@ def generate_synthetic_startups(n: int = 800, seed: int = 42) -> pd.DataFrame:
     """
     rng = np.random.default_rng(seed)
 
+    sectors = ["AI/ML", "FinTech", "HealthTech", "DevTools", "Climate", "SaaS", "Robotics"]
+    locations = ["San Francisco", "New York", "Austin", "Boston", "Seattle", "Remote"]
+
+    n_founders           = rng.integers(1, 5, n)
+    founder_prior_exits  = rng.integers(0, 3, n)           # 0–2 prior exits
+    founder_ivy          = rng.binomial(1, 0.25, n)        # 25% ivy-league
+    founder_phd          = rng.binomial(1, 0.18, n)
+    team_size_at_seed    = rng.integers(2, 12, n)
+    sector               = rng.choice(sectors, n)
+    location             = rng.choice(locations, n)
+    seed_amount_usd      = rng.integers(200_000, 3_000_000, n)
+    months_since_seed    = rng.integers(6, 48, n)
+    pivot_count          = rng.integers(0, 3, n)
+    has_patent           = rng.binomial(1, 0.15, n)
+    github_stars_proxy   = rng.integers(0, 4000, n)        # proxy for technical traction
+    press_mentions       = rng.integers(0, 30, n)
+    domain_overlap       = rng.uniform(0, 1, n)            # 0–1 fit with fund thesis
+
