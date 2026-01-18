@@ -112,3 +112,19 @@ def generate_synthetic_startups(n: int = 800, seed: int = 42) -> pd.DataFrame:
     press_mentions       = rng.integers(0, 30, n)
     domain_overlap       = rng.uniform(0, 1, n)            # 0–1 fit with fund thesis
 
+    # Label generation — weighted logistic signal
+    log_odds = (
+        0.9  * founder_prior_exits +
+        0.5  * founder_ivy +
+        0.4  * founder_phd +
+        0.3  * (team_size_at_seed / 10) +
+        0.6  * domain_overlap +
+        0.4  * (github_stars_proxy / 4000) +
+        0.2  * (seed_amount_usd / 3_000_000) +
+        0.3  * (press_mentions / 30) -
+        0.4  * pivot_count +
+        rng.normal(0, 0.5, n)  # noise
+    )
+    prob = 1 / (1 + np.exp(-log_odds + 1.5))
+    series_a_success = rng.binomial(1, prob)
+
