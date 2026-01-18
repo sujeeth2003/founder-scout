@@ -146,3 +146,12 @@ def generate_synthetic_startups(n: int = 800, seed: int = 42) -> pd.DataFrame:
         "series_a_success":    series_a_success,
     })
 
+    return df
+
+
+if __name__ == "__main__":
+    df = generate_synthetic_startups(800)
+    df.to_csv("data/startups.csv", index=False)
+    print(f"Generated {len(df)} startup records")
+    print(f"Series A success rate: {df.series_a_success.mean():.2%}")
+    print(df.head())
