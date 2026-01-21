@@ -34,3 +34,15 @@ from model import load_model, score_startup
 from dotenv import load_dotenv
 load_dotenv()
 
+# ─── State ────────────────────────────────────────────────────────────────────
+
+class DealState(TypedDict):
+    startup_profile:  dict          # raw input
+    github_signals:   dict          # from GitHub API
+    model_score:      dict          # probability + flags
+    memo_markdown:    str           # final output
+    error:            Optional[str]
+
+
+# ─── Nodes ────────────────────────────────────────────────────────────────────
+
