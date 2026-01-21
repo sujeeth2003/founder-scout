@@ -17,3 +17,20 @@ Flow:
       ↓
   [Output] memo dict + markdown string
 
+Requires: ANTHROPIC_API_KEY in environment
+Optional:  GITHUB_TOKEN for higher rate limits
+"""
+
+import os
+import json
+from typing import TypedDict, Optional
+
+from langgraph.graph import StateGraph, END
+from langchain_anthropic import ChatAnthropic
+from langchain_core.messages import HumanMessage, SystemMessage
+
+from ingest import fetch_github_founder
+from model import load_model, score_startup
+from dotenv import load_dotenv
+load_dotenv()
+
