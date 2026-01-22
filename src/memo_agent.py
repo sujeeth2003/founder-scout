@@ -75,3 +75,19 @@ def score_node(state: DealState) -> DealState:
         }
     return {**state, "model_score": score}
 
+
+def write_memo_node(state: DealState) -> DealState:
+    """Use Claude to write a structured investment memo."""
+    llm = ChatAnthropic(model="claude-sonnet-4-20250514", max_tokens=1200)
+
+    profile = state["startup_profile"]
+    score   = state["model_score"]
+    gh      = state["github_signals"]
+
+    system_prompt = """You are a venture capital analyst. Write concise, precise investment memos.
+Output ONLY the memo in clean markdown. No preamble. No meta-commentary.
+Structure: Overview | Team | Traction | Market | Risks | Recommendation"""
+
+    user_prompt = f"""
+Write a one-page investment memo for this startup.
+
