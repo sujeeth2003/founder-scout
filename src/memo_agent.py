@@ -105,3 +105,13 @@ Write a one-page investment memo for this startup.
 Write the memo now. Be direct. Use numbers where available. Flag key risks clearly.
 """
 
+    response = llm.invoke([
+        SystemMessage(content=system_prompt),
+        HumanMessage(content=user_prompt)
+    ])
+
+    return {**state, "memo_markdown": response.content}
+
+
+# ─── Graph ────────────────────────────────────────────────────────────────────
+
