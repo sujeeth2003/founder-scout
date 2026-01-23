@@ -128,3 +128,23 @@ def score_startup(startup: dict, model_bundle: dict) -> dict:
     le    = model_bundle["label_encoder"]
     feats = model_bundle["features"]
 
+    row = dict(startup)
+    # Handle unseen sector labels gracefully
+    known_sectors = list(le.classes_)
+    sector = row.get("sector", "SaaS")
+    row["sector_encoded"] = le.transform([sector])[0] if sector in known_sectors else 0
+
+    X = pd.DataFrame([row])[feats]
+    prob = model.predict_proba(X)[0][1]
+
+    # Risk flags
+    flags = []
+    if row.get("pivot_count", 0) >= 2:
+        flags.append("Multiple pivots — product-market fit unclear")
+    if row.get("founder_prior_exits", 0) == 0 and row.get("founder_ivy", 0) == 0:
+        flags.append("First-time founders without institutional pedigree")
+    if row.get("domain_overlap", 0) < 0.3:
+        flags.append("Low alignment with fund thesis")
+    if row.get("github_stars_proxy", 0) < 100:
+        flags.append("Limited technical traction signals")
+
