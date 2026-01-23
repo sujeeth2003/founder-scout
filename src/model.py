@@ -66,3 +66,18 @@ def train(data_path: str = "data/startups.csv",
         X, y, test_size=test_size, random_state=seed, stratify=y
     )
 
+    model = GradientBoostingClassifier(
+        n_estimators=300,
+        learning_rate=0.05,
+        max_depth=4,
+        subsample=0.8,
+        random_state=seed,
+    )
+    model.fit(X_train, y_train)
+
+    # Evaluation
+    y_prob  = model.predict_proba(X_test)[:, 1]
+    y_pred  = model.predict(X_test)
+    auc     = roc_auc_score(y_test, y_prob)
+    cv_aucs = cross_val_score(model, X, y, cv=5, scoring="roc_auc")
+
