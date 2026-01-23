@@ -104,3 +104,27 @@ def load_model(path: str = "outputs/model.pkl"):
     return joblib.load(path)
 
 
+def score_startup(startup: dict, model_bundle: dict) -> dict:
+    """
+    Score a single startup dict and return probability + risk flags.
+
+    startup = {
+        "n_founders": 2,
+        "founder_prior_exits": 1,
+        "founder_ivy": 0,
+        "founder_phd": 1,
+        "team_size_at_seed": 4,
+        "seed_amount_usd": 500000,
+        "months_since_seed": 12,
+        "pivot_count": 0,
+        "has_patent": 0,
+        "github_stars_proxy": 800,
+        "press_mentions": 5,
+        "domain_overlap": 0.8,
+        "sector": "AI/ML",
+    }
+    """
+    model = model_bundle["model"]
+    le    = model_bundle["label_encoder"]
+    feats = model_bundle["features"]
+
