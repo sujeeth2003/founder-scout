@@ -43,3 +43,19 @@ founder_follower_log = np.round(github_stars_log * 0.6 + np.random.normal(0, 0.5
 has_ml_repos = np.random.choice([1, 0], size=num_rows, p=[0.4, 0.6])
 num_languages = np.random.poisson(lam=4, size=num_rows).clip(1, 15)
 
+# 3. New Calculated & Metadata Columns
+tech_depth_score = np.round((github_stars_log * 0.4) + (has_ml_repos * 2) + (num_languages * 0.2), 2)
+fund_thesis_overlap = np.round(np.random.beta(5, 2, size=num_rows), 2)
+account_age_years = np.random.randint(1, 15, size=num_rows)
+
+# 4. Success Logic (Weighted combination of features)
+success_prob = (
+    (prior_exits * 0.15) + 
+    (raised_seed * 0.2) + 
+    (domain_match * 0.2) +
+    (tech_depth_score * 0.05) +
+    (has_ml_repos * 0.1)
+)
+success_prob = np.clip(success_prob / success_prob.max(), 0, 1)
+series_a_success = (np.random.rand(num_rows) < success_prob).astype(int)
+
