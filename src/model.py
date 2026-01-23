@@ -81,3 +81,19 @@ def train(data_path: str = "data/startups.csv",
     auc     = roc_auc_score(y_test, y_prob)
     cv_aucs = cross_val_score(model, X, y, cv=5, scoring="roc_auc")
 
+    print(f"\n── Model Evaluation ──────────────────────")
+    print(f"  Test ROC-AUC     : {auc:.4f}")
+    print(f"  5-Fold CV AUC    : {cv_aucs.mean():.4f} ± {cv_aucs.std():.4f}")
+    print(f"\nClassification Report:\n{classification_report(y_test, y_pred)}")
+    print(f"Confusion Matrix:\n{confusion_matrix(y_test, y_pred)}")
+
+    # Feature importance
+    fi = pd.Series(model.feature_importances_, index=FEATURE_COLS).sort_values(ascending=False)
+    print(f"\nTop Features:\n{fi.to_string()}")
+
+    # Save
+    Path(output_dir).mkdir(exist_ok=True)
+    joblib.dump({"model": model, "label_encoder": le, "features": FEATURE_COLS},
+                f"{output_dir}/model.pkl")
+    print(f"\nModel saved to {output_dir}/model.pkl")
+
