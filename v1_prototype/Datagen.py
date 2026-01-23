@@ -28,3 +28,18 @@ names = [
     "Cottonmouth", "Mariah Dillard", "Shades Alvarez", "Diamondback", "Pop"
 ]
 
+founder_names = [names[i % len(names)] for i in range(num_rows)]
+
+# 1. Base Core Features
+prior_exits = np.random.choice([0, 1, 2, 3], size=num_rows, p=[0.4, 0.3, 0.2, 0.1])
+has_prior_exit = (prior_exits > 0).astype(int)
+team_size = np.random.randint(2, 26, size=num_rows)
+domain_match = np.round(np.random.uniform(0.0, 1.0, size=num_rows), 2)
+raised_seed = np.random.choice([1, 0], size=num_rows, p=[0.7, 0.3])
+
+# 2. Technical & GitHub Features
+github_stars_log = np.round(np.random.gamma(2, 2, size=num_rows), 2)
+founder_follower_log = np.round(github_stars_log * 0.6 + np.random.normal(0, 0.5, size=num_rows), 2)
+has_ml_repos = np.random.choice([1, 0], size=num_rows, p=[0.4, 0.6])
+num_languages = np.random.poisson(lam=4, size=num_rows).clip(1, 15)
+
