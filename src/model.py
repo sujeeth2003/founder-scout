@@ -12,3 +12,31 @@ Features:
   - Domain overlap with fund thesis
 """
 
+import joblib
+import numpy as np
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import (
+    roc_auc_score, classification_report, confusion_matrix
+)
+
+
+FEATURE_COLS = [
+    "n_founders",
+    "founder_prior_exits",
+    "founder_ivy",
+    "founder_phd",
+    "team_size_at_seed",
+    "seed_amount_usd",
+    "months_since_seed",
+    "pivot_count",
+    "has_patent",
+    "github_stars_proxy",
+    "press_mentions",
+    "domain_overlap",
+    "sector_encoded",
+]
+
