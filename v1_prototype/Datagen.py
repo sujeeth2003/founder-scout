@@ -59,3 +59,24 @@ success_prob = (
 success_prob = np.clip(success_prob / success_prob.max(), 0, 1)
 series_a_success = (np.random.rand(num_rows) < success_prob).astype(int)
 
+# Create DataFrame
+df = pd.DataFrame({
+    "founder_name": founder_names,
+    "prior_exits": prior_exits,
+    "has_prior_exit": has_prior_exit,
+    "tech_depth_score": tech_depth_score,
+    "github_stars_log": github_stars_log,
+    "has_ml_repos": has_ml_repos,
+    "founder_follower_log": founder_follower_log,
+    "team_size": team_size,
+    "fund_thesis_overlap": fund_thesis_overlap,
+    "raised_seed": raised_seed,
+    "account_age_years": account_age_years,
+    "domain_match": domain_match,
+    "series_a_success": series_a_success,
+    "num_languages": num_languages
+})
+
+print(df.head())
+
+df.to_csv('data/sample_startups.csv', index=False)
