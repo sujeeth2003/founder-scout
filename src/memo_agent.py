@@ -184,3 +184,10 @@ if __name__ == "__main__":
         "github_stars_proxy":  600,
     }
 
+    result = generate_memo(sample)
+
+    print("=" * 60)
+    print(f"Score: {result['model_score']['series_a_probability']:.0%} — {result['model_score']['score_label']}")
+    print(f"Risk Flags: {result['model_score']['risk_flags']}")
+    print("=" * 60)
+    print(result["memo_markdown"])
