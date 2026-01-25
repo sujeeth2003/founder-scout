@@ -19,3 +19,10 @@ import json
 import os
 from datetime import datetime
 
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")  # set in .env
+
+
+# ─────────────────────────────────────────────
+# 1. DATA INGESTION
+# ─────────────────────────────────────────────
+
