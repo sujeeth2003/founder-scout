@@ -91,3 +91,18 @@ def load_startup_data(csv_path: str) -> pd.DataFrame:
 # 2. FEATURE ENGINEERING
 # ─────────────────────────────────────────────
 
+def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Build the feature matrix from raw startup + founder fields.
+
+    Features:
+    - prior_exits: how many companies this founder has exited before
+    - github_stars_log: log-scaled GitHub stars (technical depth proxy)
+    - has_ml_repos: binary flag for ML/data work
+    - team_size: founding team headcount
+    - domain_match: does domain overlap with fund thesis (0-1 float)
+    - raised_seed: already raised seed? binary
+    - founder_follower_log: GitHub followers log-scaled
+    """
+    df = df.copy()
+
