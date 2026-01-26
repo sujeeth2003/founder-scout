@@ -26,3 +26,18 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")  # set in .env
 # 1. DATA INGESTION
 # ─────────────────────────────────────────────
 
+def fetch_github_profile(username: str) -> dict:
+    """
+    Pull public GitHub signals for a founder.
+    Proxies technical depth without needing LinkedIn API.
+    """
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
+    base = "https://api.github.com"
+
+    try:
+        user = requests.get(f"{base}/users/{username}", headers=headers).json()
+        repos = requests.get(f"{base}/users/{username}/repos?per_page=100", headers=headers).json()
+
+        if not isinstance(repos, list):
+            repos = []
+
