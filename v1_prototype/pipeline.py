@@ -77,3 +77,17 @@ def _empty_github() -> dict:
     }
 
 
+def load_startup_data(csv_path: str) -> pd.DataFrame:
+    """
+    Load Crunchbase-style CSV.
+    Expected columns: founder_name, prior_exits, team_size, domain,
+    fund_thesis_overlap (0-1), raised_seed, series_a_success (label).
+    A sample CSV is in data/sample_startups.csv
+    """
+    return pd.read_csv(csv_path)
+
+
+# ─────────────────────────────────────────────
+# 2. FEATURE ENGINEERING
+# ─────────────────────────────────────────────
+
