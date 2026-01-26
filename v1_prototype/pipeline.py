@@ -41,3 +41,20 @@ def fetch_github_profile(username: str) -> dict:
         if not isinstance(repos, list):
             repos = []
 
+        total_stars = sum(r.get("stargazers_count", 0) for r in repos)
+        languages = set(r.get("language") for r in repos if r.get("language"))
+        has_ml = any(lang in languages for lang in ["Python", "Jupyter Notebook", "R"])
+
+        return {
+            "github_username": username,
+            "public_repos": user.get("public_repos", 0),
+            "followers": user.get("followers", 0),
+            "total_stars": total_stars,
+            "num_languages": len(languages),
+            "has_ml_repos": int(has_ml),
+            "account_age_years": _account_age(user.get("created_at", "")),
+        }
+    except Exception as e:
+        print(f"GitHub fetch failed for {username}: {e}")
+        return _empty_github()
+
