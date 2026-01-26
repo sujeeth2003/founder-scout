@@ -69,3 +69,11 @@ def _account_age(created_at: str) -> float:
         return 0.0
 
 
+def _empty_github() -> dict:
+    return {
+        "github_username": "",
+        "public_repos": 0, "followers": 0, "total_stars": 0,
+        "num_languages": 0, "has_ml_repos": 0, "account_age_years": 0.0
+    }
+
+
