@@ -58,3 +58,14 @@ def fetch_github_profile(username: str) -> dict:
         print(f"GitHub fetch failed for {username}: {e}")
         return _empty_github()
 
+
+def _account_age(created_at: str) -> float:
+    if not created_at:
+        return 0.0
+    try:
+        created = datetime.strptime(created_at, "%Y-%m-%dT%H:%M:%SZ")
+        return (datetime.utcnow() - created).days / 365.25
+    except:
+        return 0.0
+
+
