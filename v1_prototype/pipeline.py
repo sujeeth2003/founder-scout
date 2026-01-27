@@ -151,3 +151,19 @@ def train_model(df: pd.DataFrame):
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
+    model = GradientBoostingClassifier(
+        n_estimators=200,
+        max_depth=3,          # shallow trees → less overfitting on small data
+        learning_rate=0.05,
+        subsample=0.8,
+        random_state=42
+    )
+    model.fit(X_train, y_train)
+
+    y_pred_proba = model.predict_proba(X_test)[:, 1]
+    y_pred = model.predict(X_test)
+
+    auc = roc_auc_score(y_test, y_pred_proba)
+    print(f"\n✅ ROC-AUC: {auc:.3f}")
+    print(classification_report(y_test, y_pred))
+
