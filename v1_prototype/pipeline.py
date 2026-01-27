@@ -106,3 +106,18 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.copy()
 
+    # Log-scale skewed counts to prevent GB from over-indexing on outliers
+    df["github_stars_log"] = np.log1p(df.get("total_stars", 0))
+    df["founder_follower_log"] = np.log1p(df.get("followers", 0))
+
+    # Composite "technical depth" score
+    df["tech_depth_score"] = (
+        df["github_stars_log"] * 0.4 +
+        df["has_ml_repos"] * 0.3 +
+        df["num_languages"].clip(0, 10) / 10 * 0.3
+    )
+
+    # Binary signals
+    df["raised_seed"] = df["raised_seed"].astype(int)
+    df["has_prior_exit"] = (df["prior_exits"] > 0).astype(int)
+
