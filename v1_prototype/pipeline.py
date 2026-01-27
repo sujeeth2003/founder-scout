@@ -167,3 +167,11 @@ def train_model(df: pd.DataFrame):
     print(f"\n✅ ROC-AUC: {auc:.3f}")
     print(classification_report(y_test, y_pred))
 
+    # Feature importance
+    importance = pd.Series(model.feature_importances_, index=feature_cols)
+    print("\nFeature Importances:")
+    print(importance.sort_values(ascending=False).to_string())
+
+    return model, scaler, feature_cols, {"roc_auc": auc}
+
+
