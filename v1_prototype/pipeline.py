@@ -121,3 +121,16 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     df["raised_seed"] = df["raised_seed"].astype(int)
     df["has_prior_exit"] = (df["prior_exits"] > 0).astype(int)
 
+    feature_cols = [
+        "prior_exits", "has_prior_exit",
+        "tech_depth_score", "github_stars_log", "has_ml_repos", "founder_follower_log",
+        "team_size", "fund_thesis_overlap", "raised_seed", "account_age_years"
+    ]
+
+    return df[feature_cols + ["series_a_success"]]
+
+
+# ─────────────────────────────────────────────
+# 3. MODEL TRAINING
+# ─────────────────────────────────────────────
+
