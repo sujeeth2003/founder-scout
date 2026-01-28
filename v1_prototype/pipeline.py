@@ -184,3 +184,15 @@ def save_model(model, scaler, feature_cols, path="models/"):
     print(f"Model saved to {path}/")
 
 
+def load_model(path="models/"):
+    model = joblib.load(f"{path}/gb_founder_model.pkl")
+    scaler = joblib.load(f"{path}/scaler.pkl")
+    with open(f"{path}/feature_cols.json") as f:
+        feature_cols = json.load(f)
+    return model, scaler, feature_cols
+
+
+# ─────────────────────────────────────────────
+# 4. SCORING A NEW FOUNDER
+# ─────────────────────────────────────────────
+
