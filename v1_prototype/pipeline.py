@@ -230,3 +230,21 @@ if __name__ == "__main__":
     print("Training model...")
     model, scaler, feature_cols, metrics = train_model(df_features)
 
+    save_model(model, scaler, feature_cols)
+
+    # Score a hypothetical founder
+    test_founder = {
+        "prior_exits": 1,
+        "has_prior_exit": 1,
+        "tech_depth_score": 0.7,
+        "github_stars_log": np.log1p(340),
+        "has_ml_repos": 1,
+        "founder_follower_log": np.log1p(210),
+        "team_size": 3,
+        "fund_thesis_overlap": 0.8,
+        "raised_seed": 1,
+        "account_age_years": 6.2
+    }
+
+    result = score_founder(test_founder, model, scaler, feature_cols)
+    print(f"\nSample founder score: {result}")
