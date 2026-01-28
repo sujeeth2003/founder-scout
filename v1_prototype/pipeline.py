@@ -175,3 +175,12 @@ def train_model(df: pd.DataFrame):
     return model, scaler, feature_cols, {"roc_auc": auc}
 
 
+def save_model(model, scaler, feature_cols, path="models/"):
+    os.makedirs(path, exist_ok=True)
+    joblib.dump(model, f"{path}/gb_founder_model.pkl")
+    joblib.dump(scaler, f"{path}/scaler.pkl")
+    with open(f"{path}/feature_cols.json", "w") as f:
+        json.dump(feature_cols, f)
+    print(f"Model saved to {path}/")
+
+
