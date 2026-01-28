@@ -215,3 +215,18 @@ def score_founder(founder_dict: dict, model, scaler, feature_cols) -> dict:
         "features_used": feature_cols,
     }
 
+
+# ─────────────────────────────────────────────
+# 5. MAIN: TRAIN ON SAMPLE DATA
+# ─────────────────────────────────────────────
+
+if __name__ == "__main__":
+    print("Loading data...")
+    df_raw = load_startup_data("data/sample_startups.csv")
+
+    print("Engineering features...")
+    df_features = engineer_features(df_raw)
+
+    print("Training model...")
+    model, scaler, feature_cols, metrics = train_model(df_features)
+
