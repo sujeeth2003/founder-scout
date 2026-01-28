@@ -196,3 +196,22 @@ def load_model(path="models/"):
 # 4. SCORING A NEW FOUNDER
 # ─────────────────────────────────────────────
 
+def score_founder(founder_dict: dict, model, scaler, feature_cols) -> dict:
+    """
+    Score a single new founder.
+    founder_dict should have same keys as feature_cols.
+
+    Returns score (0-1) + tier label.
+    """
+    x = pd.DataFrame([founder_dict])[feature_cols].fillna(0).values
+    x_scaled = scaler.transform(x)
+    score = model.predict_proba(x_scaled)[0][1]
+
+    tier = "🔴 Pass" if score < 0.35 else "🟡 Watch" if score < 0.65 else "🟢 Strong"
+
+    return {
+        "score": round(float(score), 3),
+        "tier": tier,
+        "features_used": feature_cols,
+    }
+
