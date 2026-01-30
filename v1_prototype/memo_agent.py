@@ -38,3 +38,17 @@ def search_market_size(domain: str) -> str:
     return mock_markets.get(domain.lower(), f"TAM data not cached for '{domain}'. Recommend manual research.")
 
 
+@tool
+def get_comparable_exits(domain: str) -> str:
+    """
+    Returns notable exits in this domain as comparables for the memo.
+    Replace with Crunchbase API call in production.
+    """
+    comps = {
+        "fintech": "Stripe ($95B), Plaid ($13B acq.), Brex ($12B)",
+        "healthtech": "Veeva ($17B IPO), Doximity ($7B IPO), Olive AI ($4B)",
+        "ai": "Databricks ($43B), Cohere ($2.2B), Hugging Face ($4.5B)",
+        "edtech": "Coursera ($4.8B IPO), Duolingo ($5B IPO)",
+    }
+    return comps.get(domain.lower(), "No cached comparables. Recommend manual research.")
+
