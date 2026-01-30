@@ -84,3 +84,18 @@ Then write the memo in this exact structure:
 ### The Opportunity
 [2-3 sentences on the market problem and TAM]
 
+### What They're Building
+[2-3 sentences on the product/solution]
+
+### Why This Team
+[2-3 sentences on founder signals: prior exits, technical depth, team composition]
+
+### Traction
+[1-2 sentences on seed raised, early metrics if available]
+
+### Comparable Exits
+[List 2-3 comps with valuations]
+
+### Risk Factors
+[2-3 bullet risks]
+
