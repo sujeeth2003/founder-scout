@@ -161,3 +161,19 @@ def finalize_memo(state: MemoState) -> dict:
 # BUILD THE GRAPH
 # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
+def build_memo_agent():
+    tool_node = ToolNode(tools)
+
+    graph = StateGraph(MemoState)
+    graph.add_node("agent", agent_node)
+    graph.add_node("tools", tool_node)
+    graph.add_node("finalize", finalize_memo)
+
+    graph.set_entry_point("agent")
+    graph.add_conditional_edges("agent", should_continue, {
+        "tools": "tools",
+        "finalize": "finalize"
+    })
+    graph.add_edge("tools", "agent")   # loop back after tool call
+    graph.add_edge("finalize", END)
+
