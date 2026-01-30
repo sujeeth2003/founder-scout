@@ -150,3 +150,14 @@ def should_continue(state: MemoState) -> str:
     return "finalize"
 
 
+def finalize_memo(state: MemoState) -> dict:
+    """Extract the final text memo from the last message."""
+    last = state["messages"][-1]
+    memo_text = last.content if isinstance(last.content, str) else str(last.content)
+    return {"memo": memo_text}
+
+
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# BUILD THE GRAPH
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
