@@ -24,3 +24,17 @@ from langchain_groq import ChatGroq
 # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 @tool
+def search_market_size(domain: str) -> str:
+    """
+    Stub: returns estimated TAM for a given startup domain.
+    Replace with Tavily / SerpAPI web search in production.
+    """
+    mock_markets = {
+        "fintech": "Global fintech TAM: ~$310B by 2026 (Mordor Intelligence).",
+        "healthtech": "Digital health TAM: ~$660B by 2028 (Grand View Research).",
+        "ai": "Enterprise AI TAM: ~$1.8T by 2030 (McKinsey).",
+        "edtech": "EdTech TAM: ~$400B by 2026 (HolonIQ).",
+    }
+    return mock_markets.get(domain.lower(), f"TAM data not cached for '{domain}'. Recommend manual research.")
+
+
