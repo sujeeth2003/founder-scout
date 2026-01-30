@@ -68,3 +68,19 @@ class MemoState(TypedDict):
 # AGENT NODES
 # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
+SYSTEM_PROMPT = """You are a venture capital analyst. Your job is to write concise, 
+structured one-page investment memos for early-stage startups.
+
+Use the tools available to you to pull market size and comparable exits before writing.
+Then write the memo in this exact structure:
+
+---
+## Investment Memo: [Company Name]
+
+**Domain:** [domain]  
+**Stage:** [stage]  
+**Founder Score:** [score] ([tier])  
+
+### The Opportunity
+[2-3 sentences on the market problem and TAM]
+
