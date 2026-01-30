@@ -128,3 +128,17 @@ def agent_node(state: MemoState) -> dict:
 Startup Profile:
 {json.dumps(profile, indent=2)}
 
+Founder Score: {score['score']} â€” {score['tier']}
+
+Please search for market size and comparable exits for the domain '{profile.get('domain', 'unknown')}', 
+then write the investment memo.
+"""
+    messages = [
+        SystemMessage(content=SYSTEM_PROMPT),
+        HumanMessage(content=context),
+    ]
+
+    response = llm_with_tools.invoke(messages)
+    return {"messages": [response]}
+
+
