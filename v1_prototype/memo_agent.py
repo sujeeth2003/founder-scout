@@ -142,3 +142,11 @@ then write the investment memo.
     return {"messages": [response]}
 
 
+def should_continue(state: MemoState) -> str:
+    """Route to tools if agent wants to call them, else end."""
+    last = state["messages"][-1]
+    if hasattr(last, "tool_calls") and last.tool_calls:
+        return "tools"
+    return "finalize"
+
+
