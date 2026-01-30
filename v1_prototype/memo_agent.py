@@ -114,3 +114,17 @@ llm = ChatGroq(
     groq_api_key=os.environ["GROQ_API_KEY"]
 )
 
+tools = [search_market_size, get_comparable_exits]
+llm_with_tools = llm.bind_tools(tools)
+
+
+def agent_node(state: MemoState) -> dict:
+    """Main agent: reasons, calls tools, writes memo."""
+    profile = state["startup_profile"]
+    score = state["founder_score"]
+
+    # Build the user prompt with all context
+    context = f"""
+Startup Profile:
+{json.dumps(profile, indent=2)}
+
