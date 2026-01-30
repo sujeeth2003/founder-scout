@@ -222,3 +222,12 @@ if __name__ == "__main__":
         "founder_prior_exits": 1,
     }
 
+    sample_score = {
+        "score": 0.74,
+        "tier": "ðŸŸ¢ Strong",
+        "features_used": ["prior_exits", "tech_depth_score", "fund_thesis_overlap"]
+    }
+
+    print("Generating investment memo...\n")
+    memo = generate_memo(sample_startup, sample_score)
+    print(memo)
