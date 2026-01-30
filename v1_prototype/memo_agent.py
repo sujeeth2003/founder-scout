@@ -99,3 +99,18 @@ Then write the memo in this exact structure:
 ### Risk Factors
 [2-3 bullet risks]
 
+### Recommendation
+[Pass / Watch / Invest â€” one sentence rationale]
+---
+
+Be direct. No filler. Write like a GP, not a consultant."""
+
+
+
+
+llm = ChatGroq(
+    model="llama-3.1-8b-instant",
+    temperature=0.3,
+    groq_api_key=os.environ["GROQ_API_KEY"]
+)
+
