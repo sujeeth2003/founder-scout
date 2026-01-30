@@ -202,3 +202,23 @@ def generate_memo(startup_profile: dict, founder_score: dict) -> str:
         "memo": ""
     }
 
+    final_state = agent.invoke(initial_state)
+    return final_state["memo"]
+
+
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# EXAMPLE USAGE
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+if __name__ == "__main__":
+    sample_startup = {
+        "name": "NeuralLend",
+        "domain": "fintech",
+        "stage": "seed",
+        "description": "AI-powered underwriting platform for SME loans using alternative data signals",
+        "team_size": 3,
+        "raised_seed_usd": 1_500_000,
+        "founder": "Jane Kim",
+        "founder_prior_exits": 1,
+    }
+
