@@ -184,3 +184,21 @@ def build_memo_agent():
 # PUBLIC API
 # â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
+def generate_memo(startup_profile: dict, founder_score: dict) -> str:
+    """
+    Main entry point.
+
+    startup_profile: dict with keys like name, domain, stage, description, team_size, raised_seed_usd
+    founder_score: output from pipeline.score_founder()
+
+    Returns: memo string
+    """
+    agent = build_memo_agent()
+
+    initial_state: MemoState = {
+        "messages": [],
+        "startup_profile": startup_profile,
+        "founder_score": founder_score,
+        "memo": ""
+    }
+
